@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class LightTheme {
-  final _lightColors = _LightColors();
   late ThemeData theme;
 
   LightTheme() {
@@ -10,7 +9,7 @@ class LightTheme {
       fontFamily: 'Poppins',
       //Card
       cardTheme: CardTheme(
-        color: _lightColors.cardColor,
+        color: LightColors.cardColor.color(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -19,11 +18,30 @@ class LightTheme {
   }
 }
 
-class _LightColors {
-  final Color cardColor = const Color.fromARGB(100, 255, 255, 255);
-  final Color darkBlueTextColor = const Color.fromARGB(100, 47, 82, 123);
-  final Color purpleAccentTextColor = const Color.fromARGB(80, 96, 102, 208);
-  final Color wrongAnswerCardColor = const Color.fromARGB(100, 234, 130, 130);
-  final Color trueAnswerCardColor = const Color.fromARGB(100, 96, 191, 136);
-  final Color orangeCardColor = const Color.fromARGB(100, 249, 168, 38);
+enum LightColors {
+  cardColor,
+  darkBlueTextColor,
+  purpleAccentTextColor,
+  wrongAnswerCardColor,
+  trueAnswerCardColor,
+  orangeCardColor
+}
+
+extension SetLightColors on LightColors {
+  Color color() {
+    switch (this) {
+      case LightColors.cardColor:
+        return const Color.fromARGB(255, 255, 255, 255);
+      case LightColors.darkBlueTextColor:
+        return const Color.fromARGB(255, 47, 82, 123);
+      case LightColors.purpleAccentTextColor:
+        return const Color.fromARGB(164, 96, 102, 208);
+      case LightColors.wrongAnswerCardColor:
+        return const Color.fromARGB(255, 234, 130, 130);
+      case LightColors.trueAnswerCardColor:
+        return const Color.fromARGB(255, 96, 191, 136);
+      case LightColors.orangeCardColor:
+        return const Color.fromARGB(255, 249, 168, 38);
+    }
+  }
 }
