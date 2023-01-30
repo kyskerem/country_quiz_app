@@ -4,29 +4,35 @@ import 'package:flutter_svg/svg.dart';
 import '../enums.dart';
 import '../widget/quiz_card.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          constraints: const BoxConstraints.expand(),
-          decoration: const BoxDecoration(
-              color: Colors.red,
-              image: DecorationImage(
-                  image: AssetImage('assets/images/background.png'),
-                  fit: BoxFit.cover)),
-          child: Padding(
-            padding: EdgeInsetsValues.appMargin.edgeInsets(),
-            child: Stack(
-              children: const [
-                _CountryQuizText(),
-                _QuizCard(),
-                _NewSvgPicture(),
-              ],
-            ),
-          )),
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage('assets/images/background.png'),
+                fit: BoxFit.cover)),
+        child: Padding(
+          padding: EdgeInsetsValues.appMargin.edgeInsets(),
+          child: Stack(
+            children: const [
+              _CountryQuizText(),
+              _QuizCard(),
+              _NewSvgPicture(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -61,7 +67,7 @@ class _QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return const Positioned(
       top: 280,
       left: 0,
       right: 0,

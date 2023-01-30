@@ -11,6 +11,10 @@ class NoFlagQuestionTypeWidget extends StatelessWidget {
   final String capitalCityName;
   @override
   Widget build(BuildContext context) {
+    return _questionText(context);
+  }
+
+  Text _questionText(BuildContext context) {
     return Text(
       '$capitalCityName is the capital of?',
       textAlign: TextAlign.center,
