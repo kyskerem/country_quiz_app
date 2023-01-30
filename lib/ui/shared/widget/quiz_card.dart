@@ -1,35 +1,66 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_design_app_second/core/api_services/api_service.dart';
+import 'package:flutter_design_app_second/core/models/country_data_model.dart';
 
 import '../enums.dart';
 import '../theme/theme.dart';
-import 'flag_type_question_widget.dart';
 import 'no_flag_type_question_widget.dart';
 
-class NewQuizCard extends StatelessWidget {
+class NewQuizCard extends StatefulWidget {
   const NewQuizCard({
     Key? key,
-    required this.isFlagQuestion,
   }) : super(key: key);
-  final bool isFlagQuestion;
+
+  @override
+  State<NewQuizCard> createState() => _NewQuizCardState();
+}
+
+class _NewQuizCardState extends State<NewQuizCard> {
+  final ListData _countryDataList = ListData();
+  final ApiService _apiService = ApiService();
+
+  void getDatas() async {
+    await _apiService.getCountryDatas();
+  }
+
+  void getNewCountryQuiz() async {
+    await _apiService.getCountryDatas();
+    List<CountryData> selectedCountries = [];
+    for (int i = 0; i < 1; i++) {
+      int randomNumber =
+          math.Random().nextInt(ListData.countryDataList.length - 4);
+
+      selectedCountries.addAll(
+          ListData.countryDataList.getRange(randomNumber, randomNumber + 4));
+    }
+    print('$selectedCountries selectedCountries');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getNewCountryQuiz();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Card(
           child: Column(
-            children: [
+            children: const [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
-                child: isFlagQuestion
-                    ? const FlagQuestionTypeWidget()
-                    : const NoFlagQuestionTypeWidget(capitalCityName: 'Ankara'),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+                child: NoFlagQuestionTypeWidget(capitalCityName: 'Ankara'),
               ),
-              const _NewAnswersCard(option: 'A', countryName: 'Turkey'),
-              const _NewAnswersCard(option: 'B', countryName: 'YAlakloı'),
-              const _NewAnswersCard(option: 'C', countryName: 'Habeşistan'),
-              const _NewAnswersCard(option: 'E', countryName: 'AFrika'),
-              const Visibility(
+              _NewAnswersCard(option: 'A', countryName: 'Turkey'),
+              _NewAnswersCard(option: 'B', countryName: 'YAlakloı'),
+              _NewAnswersCard(option: 'C', countryName: 'Habeşistan'),
+              _NewAnswersCard(option: 'E', countryName: 'AFrika'),
+              Visibility(
                   // visible: isAnswered ? true : false,
                   child: _NewNextButton())
             ],
