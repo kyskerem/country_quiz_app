@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/ui/shared/theme/theme.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../enums.dart';
@@ -62,14 +61,12 @@ class _QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Positioned(
+    return Positioned(
       top: 280,
       left: 0,
       right: 0,
       bottom: 0,
-      child: NewQuizCard(
-        isFlagQuestion: false,
-      ),
+      child: NewQuizCard(),
     );
   }
 }
@@ -89,75 +86,6 @@ class _NewSvgPicture extends StatelessWidget {
       child: SvgPicture.asset(
         'assets/svgs/undraw-adventure.svg',
         fit: BoxFit.scaleDown,
-      ),
-    );
-  }
-}
-
-class NewNextButton extends StatelessWidget {
-  const NewNextButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    String nextText = 'Next';
-    return GestureDetector(
-      onTap: () {},
-      child: Card(
-        margin: EdgeInsetsValues.NextCardMargin.edgeInsets(),
-        color: LightColors.orangeCardColor.color(),
-        child: Padding(
-          padding: EdgeInsetsValues.NextCardPadding.edgeInsets(),
-          child: Text(
-            nextText,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: LightColors.cardColor.color()),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class NewAnswersCard extends StatelessWidget {
-  const NewAnswersCard({
-    Key? key,
-    required this.countryName,
-    required this.option,
-  }) : super(key: key);
-  final String countryName;
-  final String option;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsValues.OptionMargin.edgeInsets(),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            side: BorderSide(color: LightColors.purpleAccentTextColor.color())),
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              option,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: LightColors.purpleAccentTextColor.color(),
-                  fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: EdgeInsetsValues.AnswerTextMargin.edgeInsets(),
-              child: Text(
-                countryName,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: LightColors.purpleAccentTextColor.color(),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
