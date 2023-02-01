@@ -1,22 +1,18 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/core/api_services/api_service.dart';
-import 'package:flutter_design_app_second/core/models/country_data_model.dart';
-import 'package:flutter_design_app_second/ui/shared/enums.dart';
-import 'package:flutter_design_app_second/ui/shared/widget/question_card.dart';
-import 'package:flutter_design_app_second/ui/shared/widget/result_card.dart';
 
-class NewQuizCard extends StatefulWidget {
-  const NewQuizCard({
-    Key? key,
-  }) : super(key: key);
+import '../../../core/api_services/api_service.dart';
+import '../../../core/models/country_data_model.dart';
+
+class QuizCard extends StatefulWidget {
+  const QuizCard({super.key});
 
   @override
-  State<NewQuizCard> createState() => _NewQuizCardState();
+  State<QuizCard> createState() => _QuizCardState();
 }
 
-class _NewQuizCardState extends State<NewQuizCard> {
+class _QuizCardState extends State<QuizCard> {
   final ApiService _apiService = ApiService();
 
   final List<CountryData> chosenCountries = [];
@@ -89,31 +85,6 @@ class _NewQuizCardState extends State<NewQuizCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      isLoading == false
-          ? Card(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsetsValues.questionCardPadding.edgeInsets(),
-                    child: isFinished == false
-                        ? QuestionCard(
-                            setSelectedCountry: setSelectedCountry,
-                            askedCountry: askedCountry,
-                            chosenCountries: chosenCountries,
-                            isAnswered: isAnswered,
-                            isTrueAnswer: isTrueAnswer,
-                            questionLimit: questionLimit,
-                            selectedCountry: selectedCountry,
-                            getNextQuiz: getNextQuiz,
-                            answeredQuestions: answeredQuestions,
-                          )
-                        : ResultCard(trueAnswers: trueAnswers),
-                  ),
-                ],
-              ),
-            )
-          : const CircularProgressIndicator()
-    ]);
+    return const Placeholder();
   }
 }

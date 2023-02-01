@@ -12,6 +12,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  bool isFinished = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +25,16 @@ class _HomeViewState extends State<HomeView> {
                 fit: BoxFit.cover)),
         child: Padding(
           padding: EdgeInsetsValues.appMargin.edgeInsets(),
-          child: Stack(
-            children: const [
-              _CountryQuizText(),
-              _QuizCard(),
-              _NewSvgPicture(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: const [
+                  _CountryQuizText(),
+                  _NewSvgPicture(),
+                ],
+              ),
+              const _QuizCard(),
             ],
           ),
         ),
@@ -44,18 +50,12 @@ class _CountryQuizText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      top: 235,
-      left: 10,
-      right: 0,
-      child: Text(
-        'Country Quiz',
-        style: Theme.of(context)
-            .textTheme
-            .headlineSmall
-            ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
+    return Text(
+      'Country Quiz',
+      style: Theme.of(context)
+          .textTheme
+          .headlineSmall
+          ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -67,13 +67,7 @@ class _QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Positioned(
-      top: 280,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      child: NewQuizCard(),
-    );
+    return const NewQuizCard();
   }
 }
 
@@ -84,15 +78,9 @@ class _NewSvgPicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 385,
-      right: 0,
-      top: 0,
-      left: 170,
-      child: SvgPicture.asset(
-        'assets/svgs/undraw-adventure.svg',
-        fit: BoxFit.scaleDown,
-      ),
+    return SvgPicture.asset(
+      'assets/svgs/undraw-adventure.svg',
+      fit: BoxFit.scaleDown,
     );
   }
 }

@@ -7,6 +7,7 @@ enum EdgeInsetsValues {
   optionMargin,
   nextCardPadding,
   nextCardMargin,
+  questionCardPadding,
 }
 
 extension SetEdgeInsetsValues on EdgeInsetsValues {
@@ -24,6 +25,8 @@ extension SetEdgeInsetsValues on EdgeInsetsValues {
         return const EdgeInsets.all(10.0);
       case EdgeInsetsValues.nextCardMargin:
         return const EdgeInsets.symmetric(vertical: 15);
+      case EdgeInsetsValues.questionCardPadding:
+        return const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20);
     }
   }
 }
