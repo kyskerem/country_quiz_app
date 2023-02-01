@@ -15,7 +15,7 @@ class ResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     void restart() {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeView(isFinished: true)));
+          MaterialPageRoute(builder: (context) => const HomeView()));
     }
 
     return Column(

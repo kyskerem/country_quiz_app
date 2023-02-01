@@ -8,7 +8,7 @@ class CountryData {
   CountryData.fromJson(Map<String, dynamic> json) {
     name = json["name"];
     capital = json["capital"];
-    flagUrl = json["flag"];
+    flagUrl = json["flags"]["png"];
   }
 
   Map<String, dynamic> toJson() {

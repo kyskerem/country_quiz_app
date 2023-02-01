@@ -18,7 +18,7 @@ extension SetEdgeInsetsValues on EdgeInsetsValues {
       case EdgeInsetsValues.appMargin:
         return const EdgeInsets.symmetric(horizontal: 35);
       case EdgeInsetsValues.answerTextMargin:
-        return const EdgeInsets.symmetric(horizontal: 20);
+        return const EdgeInsets.symmetric(horizontal: 5);
       case EdgeInsetsValues.optionMargin:
         return const EdgeInsets.fromLTRB(30, 0, 30, 15);
       case EdgeInsetsValues.nextCardPadding:

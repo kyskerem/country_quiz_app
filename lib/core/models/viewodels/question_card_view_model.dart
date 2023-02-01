@@ -14,7 +14,7 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
   int trueAnswers = 0;
 
   CountryData? askedCountry;
-  CountryData? selectedCountry;
+  static CountryData? selectedCountry;
 
   bool isLoading = true;
   bool isAnswered = false;
@@ -52,23 +52,22 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
     }
   }
 
+  bool isWrongAnswer(CountryData country) =>
+      country == selectedCountry && country != askedCountry;
+
   void changeLoadingState() {
     setState(() {
       isLoading = !isLoading;
     });
   }
 
-  bool isTrueAnswer() {
-    return selectedCountry?.capital == askedCountry?.capital;
-  }
+  bool isTrueAnswer() => selectedCountry?.capital == askedCountry?.capital;
 
   void setSelectedCountry(CountryData country) {
     selectedCountry = country;
   }
 
-  bool get isFinished {
-    return answeredQuestions == questionLimit;
-  }
+  bool get isFinished => answeredQuestions == questionLimit;
 
   void showTrueAnswer() {}
   @override

@@ -39,10 +39,11 @@ class _NewQuizCardState extends QuizCardViewModel {
                             isAnswered: isAnswered,
                             isTrueAnswer: isTrueAnswer,
                             questionLimit: questionLimit,
-                            selectedCountry: selectedCountry,
+                            selectedCountry: QuizCardViewModel.selectedCountry,
                             getNextQuiz: getNextQuiz,
                             answeredQuestions: answeredQuestions,
                             isFlagQuestion: math.Random().nextBool(),
+                            isWrongAnswer: isWrongAnswer,
                           )
                         : ResultCard(
                             trueAnswers: trueAnswers,

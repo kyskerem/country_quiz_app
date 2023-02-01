@@ -4,21 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import '../enums.dart';
 import '../widget/quiz_card.dart';
 
-class HomeView extends StatefulWidget {
-  HomeView({super.key, this.isFinished = false});
-  bool isFinished;
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
+class HomeView extends StatelessWidget {
+  const HomeView({
+    super.key,
+  });
 
-class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
-            color: Colors.red,
             image: DecorationImage(
                 image: AssetImage('assets/images/background.png'),
                 fit: BoxFit.cover)),

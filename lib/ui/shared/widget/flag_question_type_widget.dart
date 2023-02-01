@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_app/ui/shared/enums.dart';
 import 'package:quiz_app/ui/shared/theme/theme.dart';
 
@@ -14,13 +13,11 @@ class FlagQuestionTypeWidget extends StatelessWidget {
     return Column(
       children: [
         Card(
-          child: SvgPicture.network(
+          child: Image.network(
             flagUrl,
             alignment: Alignment.center,
             fit: BoxFit.fill,
             height: flagHeight,
-            excludeFromSemantics: true,
-            theme: const SvgTheme(fontSize: 14, xHeight: 7),
           ),
         ),
         Padding(

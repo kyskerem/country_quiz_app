@@ -5,7 +5,7 @@ import '../models/country_data_model.dart';
 class ApiService {
   final dio = Dio();
   final String _baseUrl =
-      'https://restcountries.com/v2/all?fields=name,capital,flag';
+      'https://restcountries.com/v2/all?fields=name,capital,flags';
 
   Future<void> getCountryDatas() async {
     try {

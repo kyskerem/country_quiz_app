@@ -13,6 +13,7 @@ class QuestionCard extends StatefulWidget {
     required this.answeredQuestions,
     required this.setSelectedCountry,
     required this.isFlagQuestion,
+    required this.isWrongAnswer,
   });
 
   CountryData? askedCountry;
@@ -25,6 +26,7 @@ class QuestionCard extends StatefulWidget {
   bool Function() isTrueAnswer;
   void Function() getNextQuiz;
   bool isFlagQuestion;
+  bool Function(CountryData country) isWrongAnswer;
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
@@ -99,7 +101,9 @@ class _QuestionCardState extends State<QuestionCard> {
         style: OutlinedButton.styleFrom(
             backgroundColor: widget.isAnswered && isCorrectAnswer
                 ? LightColors.trueAnswerCardColor.color()
-                : LightColors.cardColor.color()),
+                : widget.isAnswered && widget.isWrongAnswer(country)
+                    ? LightColors.wrongAnswerCardColor.color()
+                    : LightColors.cardColor.color()),
         onPressed: !widget.isAnswered ? chooseOption : null,
         child: Row(
           children: [
