@@ -7,6 +7,12 @@ import '../../api_services/api_service.dart';
 import '../country_data_model.dart';
 
 abstract class QuizCardViewModel extends State<NewQuizCard> {
+  @override
+  void initState() {
+    super.initState();
+    getNewCountryQuiz();
+  }
+
   final ApiService _apiService = ApiService();
   final List<CountryData> chosenCountries = [];
   int questionLimit = 40;
@@ -68,10 +74,4 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
   }
 
   bool get isFinished => answeredQuestions == questionLimit;
-
-  @override
-  void initState() {
-    super.initState();
-    getNewCountryQuiz();
-  }
 }
