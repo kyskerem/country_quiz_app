@@ -20,11 +20,11 @@ extension SetEdgeInsetsValues on EdgeInsetsValues {
       case EdgeInsetsValues.answerTextMargin:
         return const EdgeInsets.symmetric(horizontal: 5);
       case EdgeInsetsValues.optionMargin:
-        return const EdgeInsets.fromLTRB(30, 0, 30, 15);
+        return const EdgeInsets.fromLTRB(30, 0, 30, 5);
       case EdgeInsetsValues.nextCardPadding:
         return const EdgeInsets.all(10.0);
       case EdgeInsetsValues.nextCardMargin:
-        return const EdgeInsets.symmetric(vertical: 15);
+        return const EdgeInsets.symmetric(vertical: 5);
       case EdgeInsetsValues.questionCardPadding:
         return const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20);
     }

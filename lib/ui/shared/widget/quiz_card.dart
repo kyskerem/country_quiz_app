@@ -6,7 +6,7 @@ import 'package:quiz_app/ui/shared/enums.dart';
 import 'package:quiz_app/ui/shared/widget/flag_question_type_widget.dart';
 import 'package:quiz_app/ui/shared/widget/result_card.dart';
 
-import '../../../core/models/viewodels/question_card_view_model.dart';
+import '../../../core/models/view_models/question_card_view_model.dart';
 import '../theme/theme.dart';
 import 'no_flag_type_question_widget.dart';
 
@@ -39,7 +39,7 @@ class _NewQuizCardState extends QuizCardViewModel {
                             isAnswered: isAnswered,
                             isTrueAnswer: isTrueAnswer,
                             questionLimit: questionLimit,
-                            selectedCountry: QuizCardViewModel.selectedCountry,
+                            selectedCountry: selectedCountry,
                             getNextQuiz: getNextQuiz,
                             answeredQuestions: answeredQuestions,
                             isFlagQuestion: math.Random().nextBool(),

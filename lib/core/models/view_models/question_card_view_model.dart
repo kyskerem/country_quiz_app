@@ -14,7 +14,7 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
   int trueAnswers = 0;
 
   CountryData? askedCountry;
-  static CountryData? selectedCountry;
+  CountryData? selectedCountry;
 
   bool isLoading = true;
   bool isAnswered = false;
@@ -69,7 +69,6 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
 
   bool get isFinished => answeredQuestions == questionLimit;
 
-  void showTrueAnswer() {}
   @override
   void initState() {
     super.initState();

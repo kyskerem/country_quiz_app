@@ -9,13 +9,13 @@ class FlagQuestionTypeWidget extends StatelessWidget {
   final String flagUrl;
   @override
   Widget build(BuildContext context) {
-    const double flagHeight = 120;
+    const double flagHeight = 50;
     return Column(
       children: [
         Card(
           child: Image.network(
             flagUrl,
-            alignment: Alignment.center,
+            alignment: Alignment.topLeft,
             fit: BoxFit.fill,
             height: flagHeight,
           ),
