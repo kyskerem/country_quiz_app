@@ -5,7 +5,7 @@ import '../models/country_data_model.dart';
 class ApiService {
   final dio = Dio();
   final String _baseUrl =
-      'https://quiz-app-3018d-default-rtdb.firebaseio.com/countryData/-NNCTLhGLeP5iYqhp5sK.json';
+      'https://quiz-app-3018d-default-rtdb.firebaseio.com/countryData/-NNCo0QoWSfXm5Xp1dcv.json';
 
   Future<void> getCountryDatas() async {
     try {
