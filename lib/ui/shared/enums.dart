@@ -32,17 +32,3 @@ extension SetEdgeInsetsValues on EdgeInsetsValues {
 }
 
 enum DurationValues { lowDuration, mediumDuration, longDuration }
-
-extension SetDurationValues on DurationValues {
-  Duration duration() {
-    switch (this) {
-      case DurationValues.lowDuration:
-        return const Duration(seconds: 1);
-      case DurationValues.mediumDuration:
-        return const Duration(milliseconds: 1200);
-
-      case DurationValues.longDuration:
-        return const Duration(milliseconds: 1500);
-    }
-  }
-}

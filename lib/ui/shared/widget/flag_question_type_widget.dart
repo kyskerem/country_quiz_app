@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/ui/shared/enums.dart';
-import 'package:flutter_design_app_second/ui/shared/theme/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_app/ui/shared/enums.dart';
+import 'package:quiz_app/ui/shared/theme/theme.dart';
 
 class FlagQuestionTypeWidget extends StatelessWidget {
   const FlagQuestionTypeWidget({Key? key, required this.flagUrl})
@@ -10,14 +10,18 @@ class FlagQuestionTypeWidget extends StatelessWidget {
   final String flagUrl;
   @override
   Widget build(BuildContext context) {
-    const double flagHeight = 180;
+    const double flagHeight = 120;
     return Column(
       children: [
-        SvgPicture.network(
-          flagUrl,
-          alignment: Alignment.center,
-          fit: BoxFit.cover,
-          height: flagHeight,
+        Card(
+          child: SvgPicture.network(
+            flagUrl,
+            alignment: Alignment.center,
+            fit: BoxFit.fill,
+            height: flagHeight,
+            excludeFromSemantics: true,
+            theme: const SvgTheme(fontSize: 14, xHeight: 7),
+          ),
         ),
         Padding(
           padding: EdgeInsetsValues.cardMargin.edgeInsets(),
@@ -27,14 +31,18 @@ class FlagQuestionTypeWidget extends StatelessWidget {
     );
   }
 
-  Text _questionText(BuildContext context) {
+  Widget _questionText(BuildContext context) {
     const String flagQuestionText = 'Which country does this flag belong to?';
-    return Text(
-      flagQuestionText,
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: LightColors.darkBlueTextColor.color(),
-          fontWeight: FontWeight.bold),
+    return Padding(
+      padding: EdgeInsetsValues.cardMargin.edgeInsets(),
+      child: Text(
+        flagQuestionText,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: LightColors.darkBlueTextColor.color(),
+            fontWeight: FontWeight.bold,
+            fontSize: 16),
+      ),
     );
   }
 }

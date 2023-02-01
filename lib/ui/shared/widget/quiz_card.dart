@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/core/models/country_data_model.dart';
-import 'package:flutter_design_app_second/ui/shared/enums.dart';
-import 'package:flutter_design_app_second/ui/shared/widget/flag_question_type_widget.dart';
-import 'package:flutter_design_app_second/ui/shared/widget/result_card.dart';
+import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+import 'package:quiz_app/core/models/country_data_model.dart';
+import 'package:quiz_app/ui/shared/enums.dart';
+import 'package:quiz_app/ui/shared/widget/flag_question_type_widget.dart';
+import 'package:quiz_app/ui/shared/widget/result_card.dart';
+
+import '../../../core/models/viewodels/question_card_view_model.dart';
 import '../theme/theme.dart';
-import '../view/question_card_view_model.dart';
 import 'no_flag_type_question_widget.dart';
 
 part 'question_card.dart';
@@ -23,9 +25,9 @@ class _NewQuizCardState extends QuizCardViewModel {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      isLoading == false
-          ? Card(
-              child: Column(
+      Card(
+        child: isLoading == false
+            ? Column(
                 children: [
                   Padding(
                     padding: EdgeInsetsValues.questionCardPadding.edgeInsets(),
@@ -40,14 +42,22 @@ class _NewQuizCardState extends QuizCardViewModel {
                             selectedCountry: selectedCountry,
                             getNextQuiz: getNextQuiz,
                             answeredQuestions: answeredQuestions,
-                            isFlagQuestion: true,
+                            isFlagQuestion: math.Random().nextBool(),
                           )
-                        : ResultCard(trueAnswers: trueAnswers),
+                        : ResultCard(
+                            trueAnswers: trueAnswers,
+                            questionLimit: questionLimit,
+                          ),
                   ),
                 ],
+              )
+            : Padding(
+                padding: EdgeInsetsValues.nextCardPadding.edgeInsets(),
+                child: CircularProgressIndicator(
+                  color: LightColors.orangeCardColor.color(),
+                ),
               ),
-            )
-          : const CircularProgressIndicator()
+      )
     ]);
   }
 }

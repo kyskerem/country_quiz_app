@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/ui/shared/enums.dart';
-import 'package:flutter_design_app_second/ui/shared/theme/theme.dart';
-import 'package:flutter_design_app_second/ui/shared/view/home_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quiz_app/ui/shared/enums.dart';
+import 'package:quiz_app/ui/shared/theme/theme.dart';
+import 'package:quiz_app/ui/shared/view/home_view.dart';
 
 class ResultCard extends StatelessWidget {
-  ResultCard({super.key, required this.trueAnswers});
+  ResultCard(
+      {super.key, required this.trueAnswers, required this.questionLimit});
 
   int trueAnswers;
+  int questionLimit;
 
   @override
   Widget build(BuildContext context) {
+    void restart() {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeView(isFinished: true)));
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -28,14 +35,10 @@ class ResultCard extends StatelessWidget {
         Padding(
           padding: EdgeInsetsValues.nextCardMargin.edgeInsets(),
           child: OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                      builder: (context) => HomeView(
-                            isFinished: true,
-                          )),
-                );
-              },
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: LightColors.cardColor.color(),
+                  backgroundColor: LightColors.orangeCardColor.color()),
+              onPressed: restart,
               child: const Text('TRY AGAIN')),
         ),
       ],
@@ -44,6 +47,7 @@ class ResultCard extends StatelessWidget {
 
   Text finishText(BuildContext context) {
     return Text.rich(
+      textAlign: TextAlign.center,
       TextSpan(
         text: 'You got ',
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -56,7 +60,16 @@ class ResultCard extends StatelessWidget {
                   .textTheme
                   .bodyLarge!
                   .copyWith(color: LightColors.trueAnswerCardColor.color())),
-          const TextSpan(text: 'correct answers.')
+          const TextSpan(text: 'correct answers.'),
+          TextSpan(
+              text: ' ${questionLimit - trueAnswers} ',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(color: LightColors.wrongAnswerCardColor.color())),
+          const TextSpan(
+            text: 'wrong Answers',
+          )
         ],
       ),
     );

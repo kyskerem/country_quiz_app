@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/ui/shared/enums.dart';
 
 import '../theme/theme.dart';
 
@@ -14,13 +15,18 @@ class NoFlagQuestionTypeWidget extends StatelessWidget {
     return _questionText(context);
   }
 
-  Text _questionText(BuildContext context) {
-    return Text(
-      '$capitalCityName is the capital of?',
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: LightColors.darkBlueTextColor.color(),
-          fontWeight: FontWeight.bold),
+  Widget _questionText(BuildContext context) {
+    final String noFlagQuestionText = '$capitalCityName is the capital of?';
+    return Padding(
+      padding: EdgeInsetsValues.cardMargin.edgeInsets(),
+      child: Text(
+        noFlagQuestionText,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: LightColors.darkBlueTextColor.color(),
+            fontWeight: FontWeight.bold,
+            fontSize: 16),
+      ),
     );
   }
 }

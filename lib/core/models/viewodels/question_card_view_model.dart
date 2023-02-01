@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../../core/api_services/api_service.dart';
-import '../../../core/models/country_data_model.dart';
-import '../widget/quiz_card.dart';
+import '../../../ui/shared/widget/quiz_card.dart';
+import '../../api_services/api_service.dart';
+import '../country_data_model.dart';
 
 abstract class QuizCardViewModel extends State<NewQuizCard> {
   final ApiService _apiService = ApiService();
@@ -38,12 +38,6 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
     askedCountry = chosenCountries.elementAt(math.Random().nextInt(4));
   }
 
-  void changeLoadingState() {
-    setState(() {
-      isLoading = !isLoading;
-    });
-  }
-
   void getNextQuiz() {
     if (isFinished == false) {
       setState(() {
@@ -56,6 +50,12 @@ abstract class QuizCardViewModel extends State<NewQuizCard> {
         selectedCountry = null;
       });
     }
+  }
+
+  void changeLoadingState() {
+    setState(() {
+      isLoading = !isLoading;
+    });
   }
 
   bool isTrueAnswer() {
