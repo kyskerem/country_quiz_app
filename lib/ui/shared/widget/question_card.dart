@@ -1,31 +1,74 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_design_app_second/core/models/country_data_model.dart';
-import 'package:flutter_design_app_second/ui/shared/view/question_card_view_model.dart';
+part of 'quiz_card.dart';
 
-import '../enums.dart';
-import '../theme/theme.dart';
-import 'no_flag_type_question_widget.dart';
-
-class QuestionCard extends QuizCard {
-  const QuestionCard({
+class QuestionCard extends StatefulWidget {
+  QuestionCard({
     super.key,
+    required this.askedCountry,
+    required this.chosenCountries,
+    required this.isAnswered,
+    required this.questionLimit,
+    required this.selectedCountry,
+    required this.isTrueAnswer,
+    required this.getNextQuiz,
+    required this.answeredQuestions,
+    required this.setSelectedCountry,
+    required this.isFlagQuestion,
   });
+
+  CountryData? askedCountry;
+  List<CountryData> chosenCountries;
+  bool isAnswered;
+  int questionLimit;
+  int answeredQuestions;
+  Function(CountryData) setSelectedCountry;
+  CountryData? selectedCountry;
+  bool Function() isTrueAnswer;
+  void Function() getNextQuiz;
+  bool isFlagQuestion;
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
-class _QuestionCardState extends State<QuestionCard> {
+class _QuestionCardState extends State<QuestionCard>
+    with TickerProviderStateMixin {
+  late final AnimationController _animController = AnimationController(
+      vsync: this, duration: DurationValues.lowDuration.duration());
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NoFlagQuestionTypeWidget(
-            capitalCityName: widget.askedCountry?.capital ?? '-Api problem-'),
-        answerCard(context, option: 'A', country: widget.chosenCountries[0]),
-        answerCard(context, option: 'B', country: widget.chosenCountries[1]),
-        answerCard(context, option: 'C', country: widget.chosenCountries[2]),
-        answerCard(context, option: 'D', country: widget.chosenCountries[3]),
+        widget.isFlagQuestion
+            ? FlagQuestionTypeWidget(
+                flagUrl: widget.askedCountry?.flagUrl ?? '-Api Error-')
+            : NoFlagQuestionTypeWidget(
+                capitalCityName: widget.askedCountry?.capital ?? '-Api Error-'),
+        answerCard(
+          context,
+          option: 'A',
+          country: widget.chosenCountries[0],
+        ),
+        answerCard(
+          context,
+          option: 'B',
+          country: widget.chosenCountries[1],
+        ),
+        answerCard(
+          context,
+          option: 'C',
+          country: widget.chosenCountries[2],
+        ),
+        answerCard(
+          context,
+          option: 'D',
+          country: widget.chosenCountries[3],
+        ),
         Visibility(
           visible: widget.isAnswered ? true : false,
           child: _nextButton(context),
@@ -42,37 +85,28 @@ class _QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget answerCard(BuildContext context,
-      {required CountryData country, required String option}) {
-    late bool isWrongAnswer;
-    late bool isCorrectAnswer;
-    Color borderColor = LightColors.purpleAccentTextColor.color();
-
+  Widget answerCard(
+    BuildContext context, {
+    required CountryData country,
+    required String option,
+  }) {
+    bool isCorrectAnswer = country.name == widget.askedCountry?.name;
     return Padding(
       padding: EdgeInsetsValues.optionMargin.edgeInsets(),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: borderColor),
-        ),
+            animationDuration: DurationValues.longDuration.duration(),
+            backgroundColor: widget.isAnswered && isCorrectAnswer
+                ? LightColors.trueAnswerCardColor.color()
+                : LightColors.cardColor.color()),
         onPressed: widget.isAnswered == false
             ? () {
-                setState(
-                  () {
-                    widget.isAnswered = true;
-                    Future.delayed(const Duration(milliseconds: 500));
-                    widget.setSelectedCountry(country);
-                    widget.isTrueAnswer();
-                    isCorrectAnswer =
-                        widget.selectedCountry?.name == country.name;
-                    isWrongAnswer =
-                        widget.selectedCountry?.name != country.name;
-                    if (isCorrectAnswer) {
-                      borderColor = LightColors.trueAnswerCardColor.color();
-                    } else if (isWrongAnswer) {
-                      borderColor = LightColors.wrongAnswerCardColor.color();
-                    }
-                  },
-                );
+                setState(() {
+                  widget.setSelectedCountry(country);
+                  widget.isTrueAnswer();
+
+                  widget.isAnswered = true;
+                });
               }
             : null,
         child: Row(
@@ -117,10 +151,12 @@ class _QuestionCardState extends State<QuestionCard> {
         : 'Next';
     return GestureDetector(
       onTap: () {
-        setState(() {
-          widget.isAnswered = false;
-          widget.getNextQuiz();
-        });
+        setState(
+          () {
+            widget.isAnswered = false;
+            widget.getNextQuiz();
+          },
+        );
       },
       child: Card(
         margin: EdgeInsetsValues.nextCardMargin.edgeInsets(),

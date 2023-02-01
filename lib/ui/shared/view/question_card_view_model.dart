@@ -4,19 +4,12 @@ import 'package:flutter/material.dart';
 
 import '../../../core/api_services/api_service.dart';
 import '../../../core/models/country_data_model.dart';
+import '../widget/quiz_card.dart';
 
-class QuizCard extends StatefulWidget {
-  const QuizCard({super.key});
-
-  @override
-  State<QuizCard> createState() => _QuizCardState();
-}
-
-class _QuizCardState extends State<QuizCard> {
+abstract class QuizCardViewModel extends State<NewQuizCard> {
   final ApiService _apiService = ApiService();
-
   final List<CountryData> chosenCountries = [];
-  int questionLimit = 3;
+  int questionLimit = 40;
   int answeredQuestions = 0;
   int trueAnswers = 0;
 
@@ -55,6 +48,7 @@ class _QuizCardState extends State<QuizCard> {
     if (isFinished == false) {
       setState(() {
         ListData.countryDataList.remove(askedCountry);
+        ListData.countryDataList.shuffle();
         chosenCountries.clear();
         isTrueAnswer() ? trueAnswers += 1 : '';
         answeredQuestions += 1;
@@ -81,10 +75,5 @@ class _QuizCardState extends State<QuizCard> {
   void initState() {
     super.initState();
     getNewCountryQuiz();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

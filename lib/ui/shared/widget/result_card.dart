@@ -30,7 +30,10 @@ class ResultCard extends StatelessWidget {
           child: OutlinedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeView()),
+                  MaterialPageRoute(
+                      builder: (context) => HomeView(
+                            isFinished: true,
+                          )),
                 );
               },
               child: const Text('TRY AGAIN')),

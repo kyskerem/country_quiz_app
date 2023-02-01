@@ -5,7 +5,7 @@ import '../models/country_data_model.dart';
 class ApiService {
   final dio = Dio();
   final String _baseUrl =
-      'https://countriesnow.space/api/v0.1/countries/capital';
+      'https://restcountries.com/v2/all?fields=name,capital,flag';
 
   Future<void> getCountryDatas() async {
     try {
@@ -13,12 +13,12 @@ class ApiService {
 
       switch (response.statusCode) {
         case 200:
-          ListData.fromJson(response.data["data"]);
+          ListData.fromJson(response.data);
           break;
         default:
       }
     } catch (e) {
-      print(e);
+      throw '$e';
     }
   }
 }

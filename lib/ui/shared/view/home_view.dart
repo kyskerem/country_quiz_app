@@ -5,14 +5,13 @@ import '../enums.dart';
 import '../widget/quiz_card.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
-
+  HomeView({super.key, this.isFinished = false});
+  bool isFinished;
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool isFinished = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
