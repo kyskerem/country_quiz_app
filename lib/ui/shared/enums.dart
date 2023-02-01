@@ -30,5 +30,3 @@ extension SetEdgeInsetsValues on EdgeInsetsValues {
     }
   }
 }
-
-enum DurationValues { lowDuration, mediumDuration, longDuration }
