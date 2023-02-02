@@ -62,9 +62,12 @@ class _QuestionCardState extends State<QuestionCard> {
           option: 'D',
           country: widget.chosenCountries[3],
         ),
-        Visibility(
-          visible: widget.isAnswered,
-          child: _nextButton(context),
+        AnimatedCrossFade(
+          duration: DurationValues.mediumDuration.duration(),
+          crossFadeState: CrossFadeState.showSecond,
+          firstChild: const SizedBox(),
+          secondChild: Visibility(
+              visible: widget.isAnswered, child: _nextButton(context)),
         ),
         Text(
           '${widget.answeredQuestions}/${widget.questionLimit}',
@@ -97,24 +100,37 @@ class _QuestionCardState extends State<QuestionCard> {
 
     return Padding(
       padding: EdgeInsetsValues.optionMargin.edgeInsets(),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            backgroundColor: widget.isAnswered && isCorrectAnswer
-                ? LightColors.trueAnswerCardColor.color()
-                : widget.isAnswered && widget.isWrongAnswer(country)
-                    ? LightColors.wrongAnswerCardColor.color()
-                    : LightColors.cardColor.color()),
-        onPressed: !widget.isAnswered ? chooseOption : null,
-        child: Row(
-          children: [
-            _optionText(option, context),
-            Expanded(
-              child: Padding(
+      child: InkWell(
+        onTap: !widget.isAnswered ? chooseOption : null,
+        child: AnimatedContainer(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              color: widget.isAnswered && isCorrectAnswer
+                  ? LightColors.trueAnswerCardColor.color()
+                  : widget.isAnswered && widget.isWrongAnswer(country)
+                      ? LightColors.wrongAnswerCardColor.color()
+                      : LightColors.cardColor.color(),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(3, 5))
+              ]),
+          duration: DurationValues.lowDuration.duration(),
+          curve: Curves.bounceInOut,
+          child: Row(
+            children: [
+              Padding(
                 padding: EdgeInsetsValues.answerTextMargin.edgeInsets(),
-                child: _countryNameText(country, context),
+                child: _optionText(option, context),
               ),
-            ),
-          ],
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsValues.answerTextMargin.edgeInsets(),
+                  child: _countryNameText(country, context),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

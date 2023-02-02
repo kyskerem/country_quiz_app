@@ -10,21 +10,24 @@ class FlagQuestionTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double flagHeight = 50;
-    return Column(
-      children: [
-        Card(
-          child: Image.network(
-            flagUrl,
-            alignment: Alignment.topLeft,
-            fit: BoxFit.fill,
-            height: flagHeight,
+    return AnimatedContainer(
+      duration: DurationValues.mediumDuration.duration(),
+      child: Column(
+        children: [
+          Card(
+            child: Image.network(
+              flagUrl,
+              alignment: Alignment.topLeft,
+              fit: BoxFit.fill,
+              height: flagHeight,
+            ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsetsValues.cardMargin.edgeInsets(),
-          child: _questionText(context),
-        ),
-      ],
+          Padding(
+            padding: EdgeInsetsValues.cardMargin.edgeInsets(),
+            child: _questionText(context),
+          ),
+        ],
+      ),
     );
   }
 

@@ -24,41 +24,44 @@ class NewQuizCard extends StatefulWidget {
 class _NewQuizCardState extends QuizCardViewModel {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Card(
-        child: isLoading == false
-            ? Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsetsValues.questionCardPadding.edgeInsets(),
-                    child: isFinished == false
-                        ? QuestionCard(
-                            setSelectedCountry: setSelectedCountry,
-                            askedCountry: askedCountry,
-                            chosenCountries: chosenCountries,
-                            isAnswered: isAnswered,
-                            isTrueAnswer: isTrueAnswer,
-                            questionLimit: questionLimit,
-                            selectedCountry: selectedCountry,
-                            getNextQuiz: getNextQuiz,
-                            answeredQuestions: answeredQuestions,
-                            isFlagQuestion: math.Random().nextBool(),
-                            isWrongAnswer: isWrongAnswer,
-                          )
-                        : ResultCard(
-                            trueAnswers: trueAnswers,
-                            questionLimit: questionLimit,
-                          ),
-                  ),
-                ],
-              )
-            : Padding(
-                padding: EdgeInsetsValues.nextCardPadding.edgeInsets(),
-                child: CircularProgressIndicator(
-                  color: LightColors.orangeCardColor.color(),
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+        color: LightColors.cardColor.color(),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      duration: DurationValues.mediumDuration.duration(),
+      child: isLoading == false
+          ? Column(
+              children: [
+                Padding(
+                  padding: EdgeInsetsValues.questionCardPadding.edgeInsets(),
+                  child: isFinished == false
+                      ? QuestionCard(
+                          setSelectedCountry: setSelectedCountry,
+                          askedCountry: askedCountry,
+                          chosenCountries: chosenCountries,
+                          isAnswered: isAnswered,
+                          isTrueAnswer: isTrueAnswer,
+                          questionLimit: questionLimit,
+                          selectedCountry: selectedCountry,
+                          getNextQuiz: getNextQuiz,
+                          answeredQuestions: answeredQuestions,
+                          isFlagQuestion: math.Random().nextBool(),
+                          isWrongAnswer: isWrongAnswer,
+                        )
+                      : ResultCard(
+                          trueAnswers: trueAnswers,
+                          questionLimit: questionLimit,
+                        ),
                 ),
+              ],
+            )
+          : Padding(
+              padding: EdgeInsetsValues.nextCardPadding.edgeInsets(),
+              child: CircularProgressIndicator(
+                color: LightColors.orangeCardColor.color(),
               ),
-      )
-    ]);
+            ),
+    );
   }
 }
