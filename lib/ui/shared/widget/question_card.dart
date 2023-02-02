@@ -170,9 +170,17 @@ class _QuestionCardState extends State<QuestionCard> {
 
     return GestureDetector(
       onTap: toNextQuestion,
-      child: Card(
+      child: AnimatedContainer(
+        duration: DurationValues.mediumDuration.duration(),
+        decoration: BoxDecoration(
+          color: LightColors.orangeCardColor.color(),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.1), offset: Offset(1, 2))
+          ],
+        ),
         margin: EdgeInsetsValues.nextCardMargin.edgeInsets(),
-        color: LightColors.orangeCardColor.color(),
         child: Padding(
           padding: EdgeInsetsValues.nextCardPadding.edgeInsets(),
           child: Text(
