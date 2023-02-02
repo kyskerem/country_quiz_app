@@ -177,7 +177,9 @@ class _QuestionCardState extends State<QuestionCard> {
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.1), offset: Offset(1, 2))
+              color: Colors.black.withOpacity(0.1),
+              offset: Offset(1, 2),
+            )
           ],
         ),
         margin: EdgeInsetsValues.nextCardMargin.edgeInsets(),
